@@ -17,8 +17,8 @@
   "libraries": {
     "UnityEngine.UI/1.0.0": {
       "type": "project",
-      "path": "../../../Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj",
-      "msbuildProject": "../../../Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj"
+      "path": "../UnityEngine.UI/UnityEngine.UI.csproj",
+      "msbuildProject": "../UnityEngine.UI/UnityEngine.UI.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -51,8 +51,8 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
-            "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
-              "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj"
+            "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
+              "projectPath": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj"
             }
           }
         }

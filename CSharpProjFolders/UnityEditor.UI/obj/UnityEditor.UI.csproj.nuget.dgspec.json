@@ -4,14 +4,14 @@
     "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj": {}
   },
   "projects": {
-    "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
+    "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj",
-        "projectName": "UnityEngine.UI",
-        "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj",
+        "projectUniqueName": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj",
+        "projectName": "UnityEditor.UI",
+        "projectPath": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj",
         "packagesPath": "/home/gimas/.nuget/packages/",
-        "outputPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/obj/",
+        "outputPath": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/gimas/.nuget/NuGet/NuGet.Config"
@@ -25,7 +25,11 @@
         "frameworks": {
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
+                "projectPath": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -57,14 +61,14 @@
         }
       }
     },
-    "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj": {
+    "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj",
-        "projectName": "UnityEditor.UI",
-        "projectPath": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj",
+        "projectUniqueName": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj",
+        "projectName": "UnityEngine.UI",
+        "projectPath": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj",
         "packagesPath": "/home/gimas/.nuget/packages/",
-        "outputPath": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/obj/",
+        "outputPath": "/home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEngine.UI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/gimas/.nuget/NuGet/NuGet.Config"
@@ -78,11 +82,7 @@
         "frameworks": {
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
-            "projectReferences": {
-              "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
-                "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
