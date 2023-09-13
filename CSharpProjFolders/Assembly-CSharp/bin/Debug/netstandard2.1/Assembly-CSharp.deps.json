@@ -10,8 +10,6 @@
       "Assembly-CSharp/1.0.0": {
         "dependencies": {
           "Microsoft.Unity.Analyzers": "1.17.0",
-          "UnityEditor.UI": "1.0.0",
-          "UnityEngine.UI": "1.0.0",
           "com.tsk.vscode.Editor": "0.0.0.0",
           "ReportGeneratorMerged": "5.0.4.0",
           "System.Runtime.InteropServices.WindowsRuntime": "4.0.0.0",
@@ -19,6 +17,8 @@
           "Unity.Performance.Profile-Analyzer.Editor": "0.0.0.0",
           "Unity.PlasticSCM.Editor": "0.0.0.0",
           "Unity.Rider.Editor": "3.0.7.0",
+          "Unity.Sysroot.Linux_x86_64": "0.0.0.0",
+          "Unity.SysrootPackage.Editor": "1.0.0.0",
           "Unity.TestTools.CodeCoverage.Editor": "0.0.0.0",
           "Unity.TestTools.CodeCoverage.Editor.OpenCover.Model": "0.0.0.0",
           "Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection": "0.0.0.0",
@@ -26,6 +26,7 @@
           "Unity.TextMeshPro.Editor": "0.0.0.0",
           "Unity.Timeline": "1.0.0.0",
           "Unity.Timeline.Editor": "1.0.0.0",
+          "Unity.Toolchain.Win-x86_64-Linux-x86_64": "0.0.0.0",
           "Unity.VisualScripting.Antlr3.Runtime": "3.1.3.22795",
           "Unity.VisualScripting.Core": "0.0.0.0",
           "Unity.VisualScripting.Core.Editor": "1.0.0.0",
@@ -49,6 +50,7 @@
           "UnityEditor.SceneViewModule": "0.0.0.0",
           "UnityEditor.TextCoreFontEngineModule": "0.0.0.0",
           "UnityEditor.TextCoreTextEngineModule": "0.0.0.0",
+          "UnityEditor.UI": "1.0.0.0",
           "UnityEditor.UIBuilderModule": "0.0.0.0",
           "UnityEditor.UIElementsModule": "0.0.0.0",
           "UnityEditor.UIElementsSamplesModule": "0.0.0.0",
@@ -57,6 +59,7 @@
           "UnityEngine.AIModule": "0.0.0.0",
           "UnityEngine.AndroidJNIModule": "0.0.0.0",
           "UnityEngine.AnimationModule": "0.0.0.0",
+          "UnityEngine.ARModule": "0.0.0.0",
           "UnityEngine.AssetBundleModule": "0.0.0.0",
           "UnityEngine.AudioModule": "0.0.0.0",
           "UnityEngine.ClothModule": "0.0.0.0",
@@ -99,6 +102,7 @@
           "UnityEngine.TextRenderingModule": "0.0.0.0",
           "UnityEngine.TilemapModule": "0.0.0.0",
           "UnityEngine.TLSModule": "0.0.0.0",
+          "UnityEngine.UI": "1.0.0.0",
           "UnityEngine.UIElementsModule": "0.0.0.0",
           "UnityEngine.UIModule": "0.0.0.0",
           "UnityEngine.UmbraModule": "0.0.0.0",
@@ -125,19 +129,6 @@
         }
       },
       "Microsoft.Unity.Analyzers/1.17.0": {},
-      "UnityEditor.UI/1.0.0": {
-        "dependencies": {
-          "UnityEngine.UI": "1.0.0"
-        },
-        "runtime": {
-          "UnityEditor.UI.dll": {}
-        }
-      },
-      "UnityEngine.UI/1.0.0": {
-        "runtime": {
-          "UnityEngine.UI.dll": {}
-        }
-      },
       "com.tsk.vscode.Editor/0.0.0.0": {
         "runtime": {
           "com.tsk.vscode.Editor.dll": {
@@ -190,7 +181,23 @@
         "runtime": {
           "Unity.Rider.Editor.dll": {
             "assemblyVersion": "3.0.7.0",
+            "fileVersion": "3.0.7.0"
+          }
+        }
+      },
+      "Unity.Sysroot.Linux_x86_64/0.0.0.0": {
+        "runtime": {
+          "Unity.Sysroot.Linux_x86_64.dll": {
+            "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Unity.SysrootPackage.Editor/1.0.0.0": {
+        "runtime": {
+          "Unity.SysrootPackage.Editor.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -247,6 +254,14 @@
           "Unity.Timeline.Editor.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Unity.Toolchain.Win-x86_64-Linux-x86_64/0.0.0.0": {
+        "runtime": {
+          "Unity.Toolchain.Win-x86_64-Linux-x86_64.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -434,6 +449,14 @@
           }
         }
       },
+      "UnityEditor.UI/1.0.0.0": {
+        "runtime": {
+          "UnityEditor.UI.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "UnityEditor.UIBuilderModule/0.0.0.0": {
         "runtime": {
           "UnityEditor.UIBuilderModule.dll": {
@@ -493,6 +516,14 @@
       "UnityEngine.AnimationModule/0.0.0.0": {
         "runtime": {
           "UnityEngine.AnimationModule.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "UnityEngine.ARModule/0.0.0.0": {
+        "runtime": {
+          "UnityEngine.ARModule.dll": {
             "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
           }
@@ -834,6 +865,14 @@
           }
         }
       },
+      "UnityEngine.UI/1.0.0.0": {
+        "runtime": {
+          "UnityEngine.UI.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "UnityEngine.UIElementsModule/0.0.0.0": {
         "runtime": {
           "UnityEngine.UIElementsModule.dll": {
@@ -1002,14 +1041,6 @@
           }
         }
       },
-      "UnityEngine.ARModule/0.0.0.0": {
-        "runtime": {
-          "UnityEngine.ARModule.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
       "Unity.Cecil/0.10.0.0": {
         "runtime": {
           "Unity.Cecil.dll": {
@@ -1030,7 +1061,7 @@
         "runtime": {
           "UnityEditor.TestRunner.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1038,7 +1069,7 @@
         "runtime": {
           "UnityEngine.TestRunner.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -1056,16 +1087,6 @@
       "sha512": "sha512-yg1ThpevWnblJTCIzPw52EUzuzBHdjWT0yxpCfDgFT2ti6HLRB1ZZMoKYYx9U/egqQHL7cfHkPY5psLHCL9AoA==",
       "path": "microsoft.unity.analyzers/1.17.0",
       "hashPath": "microsoft.unity.analyzers.1.17.0.nupkg.sha512"
-    },
-    "UnityEditor.UI/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "UnityEngine.UI/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "com.tsk.vscode.Editor/0.0.0.0": {
       "type": "reference",
@@ -1102,6 +1123,16 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Unity.Sysroot.Linux_x86_64/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.SysrootPackage.Editor/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Unity.TestTools.CodeCoverage.Editor/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -1133,6 +1164,11 @@
       "sha512": ""
     },
     "Unity.Timeline.Editor/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.Toolchain.Win-x86_64-Linux-x86_64/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -1252,6 +1288,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "UnityEditor.UI/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "UnityEditor.UIBuilderModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -1288,6 +1329,11 @@
       "sha512": ""
     },
     "UnityEngine.AnimationModule/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UnityEngine.ARModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -1502,6 +1548,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "UnityEngine.UI/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "UnityEngine.UIElementsModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -1603,11 +1654,6 @@
       "sha512": ""
     },
     "UnityEngine.NVIDIAModule/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "UnityEngine.ARModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

@@ -1,38 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/Assembly-CSharp.csproj": {}
+    "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj": {}
   },
   "projects": {
-    "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/Assembly-CSharp.csproj": {
+    "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/Assembly-CSharp.csproj",
+        "projectUniqueName": "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
         "projectName": "Assembly-CSharp",
-        "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/Assembly-CSharp.csproj",
-        "packagesPath": "/home/gimas/.nuget/packages/",
-        "outputPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/obj/",
+        "projectPath": "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
+        "packagesPath": "C:\\Users\\Gimas\\.nuget\\packages\\",
+        "outputPath": "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/gimas/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Gimas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
-            "projectReferences": {
-              "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj": {
-                "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj"
-              },
-              "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
-                "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -68,117 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/sdk/dotnet6/lib/sdk/6.0.408/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj",
-        "projectName": "UnityEditor.UI",
-        "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj",
-        "packagesPath": "/home/gimas/.nuget/packages/",
-        "outputPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEditor.UI/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/gimas/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.1"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netstandard2.1": {
-            "targetAlias": "netstandard2.1",
-            "projectReferences": {
-              "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
-                "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.1": {
-          "targetAlias": "netstandard2.1",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "NETStandard.Library": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/lib/sdk/dotnet6/lib/sdk/6.0.408/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj",
-        "projectName": "UnityEngine.UI",
-        "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj",
-        "packagesPath": "/home/gimas/.nuget/packages/",
-        "outputPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/gimas/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.1"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netstandard2.1": {
-            "targetAlias": "netstandard2.1",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.1": {
-          "targetAlias": "netstandard2.1",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "NETStandard.Library": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/lib/sdk/dotnet6/lib/sdk/6.0.408/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
