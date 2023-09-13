@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = UnityEditor.UI
+build_property.ProjectDir = /home/gimas/Unity/Projects/TestTask/CSharpProjFolders/UnityEditor.UI/

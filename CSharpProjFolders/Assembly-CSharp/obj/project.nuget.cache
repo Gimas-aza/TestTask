@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "PlhbrO8KlEG0oi/LMWCgJR2yioVdaEzDe9iRkdBCmzgnIWiDeIaR/1hJJQ+HVzlGOK1uPGpaEd3OO2H+45j/RA==",
+  "success": true,
+  "projectFilePath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/Assembly-CSharp.csproj",
+  "expectedPackageFiles": [
+    "/home/gimas/.nuget/packages/microsoft.unity.analyzers/1.17.0/microsoft.unity.analyzers.1.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}

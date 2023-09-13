@@ -1,0 +1,138 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETStandard,Version=v2.1": {
+      "Microsoft.Unity.Analyzers/1.17.0": {
+        "type": "package"
+      },
+      "UnityEditor.UI/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "UnityEngine.UI": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UnityEditor.UI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UnityEditor.UI.dll": {}
+        }
+      },
+      "UnityEngine.UI/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/UnityEngine.UI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UnityEngine.UI.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.Unity.Analyzers/1.17.0": {
+      "sha512": "yg1ThpevWnblJTCIzPw52EUzuzBHdjWT0yxpCfDgFT2ti6HLRB1ZZMoKYYx9U/egqQHL7cfHkPY5psLHCL9AoA==",
+      "type": "package",
+      "path": "microsoft.unity.analyzers/1.17.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/Microsoft.Unity.Analyzers.dll",
+        "microsoft.unity.analyzers.1.17.0.nupkg.sha512",
+        "microsoft.unity.analyzers.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "UnityEditor.UI/1.0.0": {
+      "type": "project",
+      "path": "../UnityEditor.UI/UnityEditor.UI.csproj",
+      "msbuildProject": "../UnityEditor.UI/UnityEditor.UI.csproj"
+    },
+    "UnityEngine.UI/1.0.0": {
+      "type": "project",
+      "path": "../UnityEngine.UI/UnityEngine.UI.csproj",
+      "msbuildProject": "../UnityEngine.UI/UnityEngine.UI.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETStandard,Version=v2.1": [
+      "Microsoft.Unity.Analyzers >= *",
+      "UnityEditor.UI >= 1.0.0",
+      "UnityEngine.UI >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/gimas/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/Assembly-CSharp.csproj",
+      "projectName": "Assembly-CSharp",
+      "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/Assembly-CSharp.csproj",
+      "packagesPath": "/home/gimas/.nuget/packages/",
+      "outputPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/Assembly-CSharp/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/gimas/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netstandard2.1"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "projectReferences": {
+            "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj": {
+              "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEditor.UI/UnityEditor.UI.csproj"
+            },
+            "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj": {
+              "projectPath": "/home/gimas/Unity/Projects/Test game/CSharpProjFolders/UnityEngine.UI/UnityEngine.UI.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netstandard2.1": {
+        "targetAlias": "netstandard2.1",
+        "dependencies": {
+          "Microsoft.Unity.Analyzers": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[*, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "NETStandard.Library": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/lib/sdk/dotnet6/lib/sdk/6.0.408/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
