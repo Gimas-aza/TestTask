@@ -33,6 +33,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < _numberSlots; i++)
         {
             var instantiateSlot = Instantiate(_slotPrefab, _containerItems.transform);
+            instantiateSlot.Init(_containerItems.transform);
             _slots.Add(instantiateSlot);
         }
 
@@ -56,6 +57,7 @@ public class Inventory : MonoBehaviour
 
             var instantiateItem = Instantiate(_items[i], _slots[j].transform);
             instantiateItem.Init(_containerDragAndDrop, _containerItems.transform); // todo Менять _containerItems.transform при продажи
+            _slots[j].IsEmpty = false;
         }
     }
 
