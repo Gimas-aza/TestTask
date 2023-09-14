@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] private int _money;
     [Header("Slot")]
     [SerializeField] private Slot _slotPrefab;
     [SerializeField] private int _numberSlots;
@@ -15,7 +16,8 @@ public class Inventory : MonoBehaviour
     private List<Slot> _slots = new(); 
     private GridLayoutGroup _containerItems;
 
-    public int Money { get; private set; }
+    public int Money => _money;
+    public List<Slot> Slots => _slots;
 
     private void Awake()
     {
@@ -63,21 +65,23 @@ public class Inventory : MonoBehaviour
 
     public void AddMoney(int money)
     {
-        Money += money;
+        _money += money;
+        Debug.Log(_money);
     }
 
     public void RemoveMoney(int money)
     {
-        Money -= money;
+        _money -= money;
+        Debug.Log(_money);
     }
 
     public void AddItem(Item item)
     {
-
+        _items.Add(item);
     }
 
     public void RemoveItem(Item item)
     {
-
+        _items.Remove(item);
     }
 }

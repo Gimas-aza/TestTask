@@ -42,11 +42,13 @@ public class Slot : MonoBehaviour, IDropHandler
         if (_containerItems != _item.Container)
         {
             SetColor();
-            Barter.OnItemTransfer?.Invoke(_item);
+            _item.IsSelling = true;
+            Barter.OnItemTransfer?.Invoke(_item, _containerItems);
         }
-        else
+        else if (_item.IsSelling)
         {
-            Barter.OnResetItemTransfer?.Invoke(_item);
+            _item.IsSelling = false;
+            Barter.OnResetItemTransfer?.Invoke(_item, _containerItems);
         }
     }
 

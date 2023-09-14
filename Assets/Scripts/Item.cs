@@ -13,12 +13,15 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private CanvasGroup _canvasGroup;
     private RectTransform _containerDragAndDrop;
     private Transform _container;
+    private Inventory _inventory;
     private Slot _slot;
 
     public string Name => _name;
     public int Price => _price;
     public int Number => _number;
     public Transform Container => _container;
+
+    public bool IsSelling = false;
 
     private void Start()
     {
@@ -31,6 +34,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         _containerDragAndDrop = containerDragAndDrop;
         _container = containerForItem;
+        _inventory = _container.GetComponent<Inventory>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -51,17 +55,59 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         _slot = _parentTransform.GetComponent<Slot>();
         transform.localPosition = Vector3.zero;
         _parentTransform.SetParent(_slot.ContainerItems);
-        TryingResetColor();
+        TryingResetSlot();
 
         _canvasGroup.blocksRaycasts = true;
     }
 
-    private void TryingResetColor()
+    public void Save()
+    {
+        SetCurrentSlot();
+        _inventory.RemoveItem(this);
+        
+        _container = _slot.ContainerItems;
+        _inventory = _container.GetComponent<Inventory>();
+        _inventory.AddItem(this);
+        _slot.ResetColor();
+        IsSelling = false;
+    }
+
+    public void Cancel()
+    {
+        SetCurrentSlot();
+        ResetSlot();
+
+        foreach (var slot in _inventory.Slots)
+        {
+            if (slot.IsEmpty)
+            {
+                _slot = slot;
+                break;
+            }
+        }
+
+        transform.SetParent(_slot.transform);
+        transform.localPosition = Vector3.zero;
+        IsSelling = false;
+    }
+
+    private void SetCurrentSlot()
+    {
+        _parentTransform = _rectTransform.parent;
+        _slot = _parentTransform.GetComponent<Slot>();
+    }
+
+    private void TryingResetSlot()
     {
         if (_rectTransform.parent != _parentTransform)
         {
-            _slot.ResetColor();
-            _slot.IsEmpty = true;
+            ResetSlot();
         }
+    }
+
+    private void ResetSlot()
+    {
+        _slot.ResetColor();
+        _slot.IsEmpty = true;
     }
 }
