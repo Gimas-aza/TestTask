@@ -51,9 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2e16f5e23390c32af651b597a0a86e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Apple
+  _name: "\u042F\u0431\u043B\u043E\u043A\u043E"
   _price: 50
   _number: 1
+  IsSelling: 0
 --- !u!225 &1973314420869869418
 CanvasGroup:
   m_ObjectHideFlags: 0

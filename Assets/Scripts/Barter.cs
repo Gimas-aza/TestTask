@@ -1,23 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Inventory))]
 public class Barter : MonoBehaviour
 {
     [Header("Barter result UI")]
-    [SerializeField] private GameObject _barterResultUI;
-    [SerializeField] private Image _arrow;
-    [SerializeField] private Text _totalCostText;
-    [SerializeField] private Button _acceptButton;
-    [SerializeField] private Button _cancelButton;
+    [SerializeField] private BarterUI _barterUI;
     [Header("Inventory")]
-    [SerializeField] private InventoryNPC _inventoryNPC;
+    [SerializeField] private Inventory _inventoryNPC;
     
-    private InventoryPlayer _inventoryPlayer;
+    private Inventory _inventoryPlayer;
     private int _totalCost;
     private List<Item> _itemsForSelling = new();
 
@@ -28,93 +22,86 @@ public class Barter : MonoBehaviour
     {
         _inventoryPlayer = GetComponent<InventoryPlayer>();
 
-        OnItemTransfer += CalculatingTotalCost;
-        OnResetItemTransfer += DeductibleTotalCost;
-        _acceptButton.onClick.AddListener(AcceptTransaction);
-        _cancelButton.onClick.AddListener(CancelTransaction);
+        OnItemTransfer += CalculateTotalCost;
+        OnResetItemTransfer += DeductTotalCost;
+        _barterUI.AcceptButton.onClick.AddListener(AcceptTransaction);
+        _barterUI.CancelButton.onClick.AddListener(CancelTransaction);
     }
 
-    private void CalculatingTotalCost(Item item, Transform container)
-    {
-        List<Item> itemFind = _itemsForSelling.FindAll(x => x == item);
-        
-        if (_itemsForSelling.Count == 0 || itemFind.Count == 0)
+    private void CalculateTotalCost(Item item, Transform container)
+    {    
+        if (_itemsForSelling.Count == 0 || !_itemsForSelling.Contains(item))
         {
             _itemsForSelling.Add(item);
-            Calculating(item, container);
-
-            ActivateBarterResultUI();
+            Calculate(item, container);
+            _barterUI.ActivateUI(_itemsForSelling.Count, _totalCost);
         }
     }
 
-    private void DeductibleTotalCost(Item item, Transform container)
+    private void DeductTotalCost(Item item, Transform container)
     {
         _itemsForSelling.Remove(item);
-        Calculating(item, container);
-
-        ActivateBarterResultUI();
+        Calculate(item, container);
+        _barterUI.ActivateUI(_itemsForSelling.Count, _totalCost);
     }
 
-    private void Calculating(Item item, Transform container)
+    private void Calculate(Item item, Transform container)
     {
         if (container.TryGetComponent(out InventoryPlayer inventoryPlayer))
         {
-            _totalCost -= item.Price;
-
-            if (_totalCost < 0)
-                _arrow.transform.localEulerAngles = new Vector3(0, 0, 0);
+            _totalCost -= item.Price * _inventoryNPC.MultiplierPriceItems;
         }
         else if (container.TryGetComponent(out InventoryNPC inventoryNPC))
         {
             _totalCost += item.Price;
-
-            if (_totalCost > 0)
-                _arrow.transform.localEulerAngles = new Vector3(0, 180, 0);
         }
-    }
 
-    private void ActivateBarterResultUI()
-    {
-        if (_itemsForSelling.Count == 0 && _totalCost == 0)
-            _barterResultUI.SetActive(false);
-        else
-            _barterResultUI.SetActive(true);
-        _totalCostText.text = _totalCost.ToString();
+        _barterUI.RotationArrow(_totalCost);
     }
 
     private void AcceptTransaction()
     {
-        if (_totalCost > 0 && _inventoryNPC.Money >= _totalCost)
-        {
-            _inventoryPlayer.AddMoney(_totalCost);
-            _inventoryNPC.RemoveMoney(_totalCost);
-        }
-        else if (_totalCost < 0 && _inventoryPlayer.Money >= -_totalCost)
-        {
-            _inventoryNPC.AddMoney(-_totalCost);
-            _inventoryPlayer.RemoveMoney(-_totalCost);
-        }
-        else
-            return;
-        
-        _totalCost = 0;
-        ActivateBarterResultUI();
+        if (!TryDebitMoney()) return;
 
+        _totalCost = 0;
         foreach (var item in _itemsForSelling.ToList())
         {
-            item.Save();
-
+            item.AcceptTrade();
             _itemsForSelling.Remove(item);
         }
+
+        _barterUI.ActivateUI(_itemsForSelling.Count, _totalCost);
     }
 
     private void CancelTransaction()
     {
+        _totalCost = 0;
         foreach (var item in _itemsForSelling.ToList())
         {
             item.Cancel();
-
             _itemsForSelling.Remove(item);
         }
+
+        _barterUI.ActivateUI(_itemsForSelling.Count, _totalCost);
+    }
+
+    private bool TryDebitMoney()
+    {
+        if (_totalCost > 0 && _inventoryNPC.CurrentMoney >= _totalCost)
+        {
+            _inventoryPlayer.AddMoney(_totalCost);
+            _inventoryNPC.RemoveMoney(_totalCost);
+            return true;
+        }
+        else if (_totalCost < 0 && _inventoryPlayer.CurrentMoney >= -_totalCost)
+        {
+            _inventoryNPC.AddMoney(-_totalCost);
+            _inventoryPlayer.RemoveMoney(-_totalCost);
+            return true;
+        }
+        else if (_totalCost == 0 && _itemsForSelling.Count > 0)
+            return true;
+        else
+            return false;
     }
 }

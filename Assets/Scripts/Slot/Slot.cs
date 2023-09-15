@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,7 +7,6 @@ public class Slot : MonoBehaviour, IDropHandler
     private Item _item;
     private Transform _containerItems;
     private Image _image;
-    private Barter _barter;
 
     public bool IsEmpty = true;
     public Transform ContainerItems => _containerItems;
@@ -60,5 +57,11 @@ public class Slot : MonoBehaviour, IDropHandler
     public void ResetColor()
     {
         _image.color = new Color32(255, 255, 255, 255);
+    }
+
+    public void Reset()
+    {
+        ResetColor();
+        IsEmpty = true;
     }
 }

@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Item : MonoBehaviour, IItem, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
+    [Header("Characteristics")]
     [SerializeField] private string _name;
     [SerializeField] private int _price;
     [SerializeField] private int _number;
@@ -15,6 +16,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Transform _container;
     private Inventory _inventory;
     private Slot _slot;
+    private InformationItemUI _informationItemUI;
 
     public string Name => _name;
     public int Price => _price;
@@ -30,11 +32,17 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         _canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public void Init(RectTransform containerDragAndDrop, Transform containerForItem)
+    public void Init(RectTransform containerDragAndDrop, Transform containerForItem, InformationItemUI informationItemUI)
     {
         _containerDragAndDrop = containerDragAndDrop;
         _container = containerForItem;
+        _informationItemUI = informationItemUI;
         _inventory = _container.GetComponent<Inventory>();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        _informationItemUI.OnShowInformation?.Invoke(this, _container);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -42,7 +50,9 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         _parentTransform = _rectTransform.parent;
         _parentTransform.SetParent(_containerDragAndDrop);
         _parentTransform.SetAsLastSibling();
+        
         _canvasGroup.blocksRaycasts = false;
+        _informationItemUI.OnShowInformation?.Invoke(this, _container);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -58,9 +68,10 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         TryingResetSlot();
 
         _canvasGroup.blocksRaycasts = true;
+        _informationItemUI.OnHiddenInformation?.Invoke();
     }
 
-    public void Save()
+    public void AcceptTrade()
     {
         SetCurrentSlot();
         _inventory.RemoveItem(this);
@@ -69,13 +80,14 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         _inventory = _container.GetComponent<Inventory>();
         _inventory.AddItem(this);
         _slot.ResetColor();
+        _slot.IsEmpty = false;
         IsSelling = false;
     }
 
     public void Cancel()
     {
         SetCurrentSlot();
-        ResetSlot();
+        _slot.Reset();
 
         foreach (var slot in _inventory.Slots)
         {
@@ -88,6 +100,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         transform.SetParent(_slot.transform);
         transform.localPosition = Vector3.zero;
+        _slot.IsEmpty = false;
         IsSelling = false;
     }
 
@@ -101,13 +114,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (_rectTransform.parent != _parentTransform)
         {
-            ResetSlot();
+            _slot.Reset();
         }
-    }
-
-    private void ResetSlot()
-    {
-        _slot.ResetColor();
-        _slot.IsEmpty = true;
     }
 }

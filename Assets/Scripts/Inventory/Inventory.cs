@@ -2,22 +2,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+public abstract class Inventory : MonoBehaviour
 {
-    [SerializeField] private int _money;
+    [SerializeField] private int _currentMoney;
     [Header("Slot")]
     [SerializeField] private Slot _slotPrefab;
     [SerializeField] private int _numberSlots;
     [Header("Items")]
     [SerializeField] private List<Item> _items = new();
+    [SerializeField] private InformationItemUI _informationItemUI;
     [Header("Drag and Drop Container")]
     [SerializeField] private RectTransform _containerDragAndDrop;
+    [Header("Money")]
+    [SerializeField] private BarMoneyUI _barMoneyUI;
+    [SerializeField] private int _multiplierPriceItems;
+
 
     private List<Slot> _slots = new(); 
     private GridLayoutGroup _containerItems;
+    private float _deactivationDelay = 0.01f;
 
-    public int Money => _money;
+    public int CurrentMoney => _currentMoney;
+    public int MultiplierPriceItems => _multiplierPriceItems;
     public List<Slot> Slots => _slots;
+    public List<Item> Items => _items;
 
     private void Awake()
     {
@@ -28,9 +36,11 @@ public class Inventory : MonoBehaviour
     {
         CreateSlots();
         CreateItems();
+
+        _barMoneyUI.SetMoney(_currentMoney);
     }
 
-    private void CreateSlots()
+    protected void CreateSlots()
     {
         for (int i = 0; i < _numberSlots; i++)
         {
@@ -39,7 +49,7 @@ public class Inventory : MonoBehaviour
             _slots.Add(instantiateSlot);
         }
 
-        Invoke(nameof(DeactivateGrid), 0.1f);
+        Invoke(nameof(DeactivateGrid), _deactivationDelay);
     }
 
     private void DeactivateGrid()
@@ -47,32 +57,33 @@ public class Inventory : MonoBehaviour
         _containerItems.enabled = false;
     }
 
-    private void CreateItems()
+    protected void CreateItems()
     {
-        int i = 0;
-        int j = 0;
-
-        for (; i < _items.Count; i++)
+        for (int i = 0; i < _items.Count; i++)
         {
-            for (; j < _slots.Count; j++)
-                if (_slots[j].IsEmpty) break;
-
-            var instantiateItem = Instantiate(_items[i], _slots[j].transform);
-            instantiateItem.Init(_containerDragAndDrop, _containerItems.transform); // todo Менять _containerItems.transform при продажи
-            _slots[j].IsEmpty = false;
+            for (int j = 0; j < _slots.Count; j++)
+            {
+                if (_slots[j].IsEmpty)
+                {
+                    var instantiateItem = Instantiate(_items[i], _slots[j].transform);
+                    instantiateItem.Init(_containerDragAndDrop, _containerItems.transform, _informationItemUI);
+                    _slots[j].IsEmpty = false;
+                    break;
+                }
+            }
         }
     }
 
     public void AddMoney(int money)
     {
-        _money += money;
-        Debug.Log(_money);
+        _currentMoney += money;
+        _barMoneyUI.SetMoney(_currentMoney);
     }
 
     public void RemoveMoney(int money)
     {
-        _money -= money;
-        Debug.Log(_money);
+        _currentMoney -= money;
+        _barMoneyUI.SetMoney(_currentMoney);
     }
 
     public void AddItem(Item item)
