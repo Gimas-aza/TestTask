@@ -558,3 +558,9 @@ D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\ob
 D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\obj\Debug\netstandard2.1\Assembly-CSharp.csproj.CopyComplete
 D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\obj\Debug\netstandard2.1\Assembly-CSharp.dll
 D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\obj\Debug\netstandard2.1\Assembly-CSharp.pdb
+D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\bin\Debug\netstandard2.1\Unity.Recorder.Base.dll
+D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\bin\Debug\netstandard2.1\Unity.Recorder.dll
+D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\bin\Debug\netstandard2.1\Unity.Recorder.Editor.dll
+D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\bin\Debug\netstandard2.1\Unity.Recorder.Editor.pdb
+D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\bin\Debug\netstandard2.1\Unity.Recorder.Base.pdb
+D:\Gimas\Documents\Unity\MyProject\TestTask\CSharpProjFolders\Assembly-CSharp\bin\Debug\netstandard2.1\Unity.Recorder.pdb

@@ -16,6 +16,9 @@
           "Unity.EditorCoroutines.Editor": "0.0.0.0",
           "Unity.Performance.Profile-Analyzer.Editor": "0.0.0.0",
           "Unity.PlasticSCM.Editor": "0.0.0.0",
+          "Unity.Recorder.Base": "0.0.0.0",
+          "Unity.Recorder": "0.0.0.0",
+          "Unity.Recorder.Editor": "0.0.0.0",
           "Unity.Rider.Editor": "3.0.7.0",
           "Unity.Sysroot.Linux_x86_64": "0.0.0.0",
           "Unity.SysrootPackage.Editor": "1.0.0.0",
@@ -172,6 +175,30 @@
       "Unity.PlasticSCM.Editor/0.0.0.0": {
         "runtime": {
           "Unity.PlasticSCM.Editor.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Unity.Recorder.Base/0.0.0.0": {
+        "runtime": {
+          "Unity.Recorder.Base.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Unity.Recorder/0.0.0.0": {
+        "runtime": {
+          "Unity.Recorder.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Unity.Recorder.Editor/0.0.0.0": {
+        "runtime": {
+          "Unity.Recorder.Editor.dll": {
             "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
           }
@@ -1049,14 +1076,6 @@
           }
         }
       },
-      "Unity.Settings.Editor/0.0.0.0": {
-        "runtime": {
-          "Unity.Settings.Editor.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
       "UnityEditor.TestRunner/1.0.0.0": {
         "runtime": {
           "UnityEditor.TestRunner.dll": {
@@ -1070,6 +1089,14 @@
           "UnityEngine.TestRunner.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Unity.Settings.Editor/0.0.0.0": {
+        "runtime": {
+          "Unity.Settings.Editor.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
           }
         }
       }
@@ -1114,6 +1141,21 @@
       "sha512": ""
     },
     "Unity.PlasticSCM.Editor/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.Recorder.Base/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.Recorder/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.Recorder.Editor/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -1663,17 +1705,17 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Unity.Settings.Editor/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
     "UnityEditor.TestRunner/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
     "UnityEngine.TestRunner/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.Settings.Editor/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
