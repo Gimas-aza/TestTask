@@ -67,6 +67,7 @@ public abstract class Inventory : MonoBehaviour
                 {
                     var instantiateItem = Instantiate(_items[i], _slots[j].transform);
                     instantiateItem.Init(_containerDragAndDrop, _containerItems.transform, _informationItemUI);
+                    _items[i] = instantiateItem;
                     _slots[j].IsEmpty = false;
                     break;
                 }

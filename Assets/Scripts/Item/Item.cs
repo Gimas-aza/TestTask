@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Item : MonoBehaviour, IItem, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [Header("Characteristics")]
     [SerializeField] private string _name;
