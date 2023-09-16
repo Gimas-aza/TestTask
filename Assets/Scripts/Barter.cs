@@ -41,22 +41,34 @@ public class Barter : MonoBehaviour
     private void DeductTotalCost(Item item, Transform container)
     {
         _itemsForSelling.Remove(item);
-        Calculate(item, container);
+        Calculate(item, container, false);
         _barterUI.ActivateUI(_itemsForSelling.Count, _totalCost);
     }
 
-    private void Calculate(Item item, Transform container)
+    private void Calculate(Item item, Transform container, bool activeMultiplier = true)
     {
+        int multiplierPrice;
+
         if (container.TryGetComponent(out InventoryPlayer inventoryPlayer))
         {
-            _totalCost -= item.Price * _inventoryNPC.MultiplierPriceItems;
+            multiplierPrice = GetMultiplierPrice(activeMultiplier);          
+            _totalCost -= item.Price * multiplierPrice;
         }
         else if (container.TryGetComponent(out InventoryNPC inventoryNPC))
         {
-            _totalCost += item.Price;
+            multiplierPrice = GetMultiplierPrice(!activeMultiplier);
+            _totalCost += item.Price * multiplierPrice;
         }
 
         _barterUI.RotationArrow(_totalCost);
+    }
+
+    private int GetMultiplierPrice(bool activeMultiplier)
+    {
+        if (activeMultiplier) 
+            return _inventoryNPC.MultiplierPriceItems;
+        else 
+            return _inventoryPlayer.MultiplierPriceItems;
     }
 
     private void AcceptTransaction()

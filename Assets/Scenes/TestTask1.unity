@@ -3361,7 +3361,11 @@ MonoBehaviour:
   _slotPrefab: {fileID: 4482167036882887977, guid: 99611d07844600845be513af5a87611c, type: 3}
   _numberSlots: 20
   _items:
-  - {fileID: 700962063204299485, guid: c99b5a43cd488752195d44985db247e0, type: 3}
+  - {fileID: 700962063204299485, guid: 42b29386487318e4d9603f2c4b94f9d5, type: 3}
+  - {fileID: 700962063204299485, guid: 3564146eba41dbe4b80c59536a82a822, type: 3}
+  - {fileID: 700962063204299485, guid: d277cb2cd2feb7042af4826190d541bd, type: 3}
+  - {fileID: 700962063204299485, guid: dc97ecfc2f969154c9200638dd2f41e6, type: 3}
+  - {fileID: 700962063204299485, guid: 3265710baef093041b6141738e1d7327, type: 3}
   _informationItemUI: {fileID: 401885630}
   _containerDragAndDrop: {fileID: 984009973}
   _barMoneyUI: {fileID: 466463717}
