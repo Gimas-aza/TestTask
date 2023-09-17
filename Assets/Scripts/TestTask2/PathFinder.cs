@@ -26,7 +26,7 @@ public class PathFinder : MonoBehaviour, IPathFinder
             Debug.Log("Найденный путь:");
             foreach (Vector2 point in path)
             {
-                Debug.Log(point);
+                Debug.Log(point.x);
             }
         }
         else
@@ -35,104 +35,117 @@ public class PathFinder : MonoBehaviour, IPathFinder
         }
     }
 
-    public IEnumerable<Vector2> GetPath(Vector2 A, Vector2 C, IEnumerable<Edge> edges)
+   public IEnumerable<Vector2> GetPath(Vector2 start, Vector2 end, IEnumerable<Edge> edges)
     {
-        // Создаем список для хранения узлов, которые нужно посетить
-        var openSet = new List<Node>();
+        // Создаём граф, представляющий рёбра и их вершины
+        Dictionary<Vector2, List<Vector2>> graph = CreateGraph(edges);
 
-        // Создаем начальный узел и добавляем его в открытый список
-        var startNode = new Node(A, null, 0);
-        openSet.Add(startNode);
+        // Используем алгоритм поиска пути, например, A*
+        List<Vector2> path = AStarSearch(graph, start, end);
 
-        // Создаем словарь для хранения стоимости пути от начального узла до текущего узла
-        var gScores = new Dictionary<Node, float>();
-        gScores[startNode] = 0;
+        return path;
+    }
 
-        // Начинаем поиск пути
-        while (openSet.Count > 0)
+    private Dictionary<Vector2, List<Vector2>> CreateGraph(IEnumerable<Edge> edges)
+    {
+        Dictionary<Vector2, List<Vector2>> graph = new Dictionary<Vector2, List<Vector2>>();
+
+        foreach (Edge edge in edges)
         {
-            // Находим узел с наименьшей стоимостью из открытого списка
-            var currentNode = openSet.OrderBy(node => node.Cost).First();
-        
-            // Если мы достигли конечной точки, восстанавливаем путь и возвращаем его
-            if (currentNode.Position == C)
+            if (!graph.ContainsKey(edge.Start))
             {
-                return ReconstructPath(currentNode);
+                graph[edge.Start] = new List<Vector2>();
             }
 
-            // Удаляем текущий узел из открытого списка
-            openSet.Remove(currentNode);
-
-            // Рассматриваем соседние узлы
-            foreach (var edge in edges)
+            if (!graph.ContainsKey(edge.End))
             {
-                // if (edge.First.Equals(edge.Second)) continue; // Пропускаем рёбра, соединяющие один и тот же прямоугольник
+                graph[edge.End] = new List<Vector2>();
+            }
 
-                // Проверяем, если текущий узел находится на одном из концов ребра
-                if (currentNode.Position == (Vector2) edge.Start || currentNode.Position == (Vector2) edge.End)
+            graph[edge.Start].Add(edge.End);
+            graph[edge.End].Add(edge.Start);
+        }
+
+        return graph;
+    }
+
+    private List<Vector2> AStarSearch(Dictionary<Vector2, List<Vector2>> graph, Vector2 start, Vector2 end)
+    {
+        List<Vector2> path = new List<Vector2>();
+        PriorityQueue<Vector2> openSet = new PriorityQueue<Vector2>();
+        Dictionary<Vector2, Vector2> cameFrom = new Dictionary<Vector2, Vector2>();
+        Dictionary<Vector2, float> gScore = new Dictionary<Vector2, float>();
+
+        openSet.Enqueue(start, 0);
+        gScore[start] = 0;
+
+        while (openSet.Count > 0)
+        {
+            Vector2 current = openSet.Dequeue();
+
+            if (current == end)
+            {
+                path = ReconstructPath(cameFrom, current);
+                break;
+            }
+
+            foreach (Vector2 neighbor in graph[current])
+            {
+                float tentativeGScore = gScore[current] + Vector2.Distance(current, neighbor);
+                
+                if (!gScore.ContainsKey(neighbor) || tentativeGScore < gScore[neighbor])
                 {
-                    Debug.Log("currentNode: " + currentNode.Position);
-                    // Вычисляем следующий узел на ребре
-                    var nextPosition = (currentNode.Position == (Vector2) edge.Start) ? edge.End : edge.Start;
 
-                    // Рассчитываем стоимость перемещения на ребро
-                    var movementCost = Vector2.Distance(currentNode.Position, nextPosition);
-
-                    // Учитываем повороты
-                    if (currentNode.Previous != null)
-                    {
-                        var prevDirection = currentNode.Position - currentNode.Previous.Position;
-                        var nextDirection = (Vector2) nextPosition - currentNode.Position;
-                        if (Vector2.Dot(prevDirection.normalized, nextDirection.normalized) < 0)
-                        {
-                            movementCost += 1; // Увеличиваем стоимость на поворот
-                        }
-                    }
-
-                    // Вычисляем общую стоимость для следующего узла
-                    var tentativeGScore = gScores[currentNode] + movementCost;
-
-                    // Если следующий узел еще не в открытом списке или новая стоимость меньше старой
-                    if (!openSet.Any(node => node.Position == (Vector2) nextPosition) || 
-                        tentativeGScore < gScores[new Node(nextPosition, currentNode, tentativeGScore)])
-                    {
-                        // Создаем новый узел
-                        var nextNode = new Node(nextPosition, currentNode, tentativeGScore);
-                        openSet.Add(nextNode);
-                        gScores[nextNode] = tentativeGScore;
-                    }
+                    cameFrom[neighbor] = current;
+                    gScore[neighbor] = tentativeGScore;
+                    float priority = tentativeGScore + Vector2.Distance(neighbor, end);
+                    openSet.Enqueue(neighbor, priority);
                 }
             }
         }
 
-        // Если не удалось найти путь, возвращаем null
-        return null;
+        return path;
     }
 
-    // Метод для восстановления пути из узлов
-    private IEnumerable<Vector2> ReconstructPath(Node node)
+    private List<Vector2> ReconstructPath(Dictionary<Vector2, Vector2> cameFrom, Vector2 current)
     {
-        var path = new List<Vector2>();
-        while (node != null)
+        List<Vector2> path = new List<Vector2>();
+        while (cameFrom.ContainsKey(current))
         {
-            path.Add(node.Position);
-            node = node.Previous;
+            path.Add(current);
+            current = cameFrom[current];
         }
         path.Reverse();
         return path;
     }
+}
 
-    private class Node
+// PriorityQueue для использования в A*
+public class PriorityQueue<T>
+{
+    private List<(T, float)> elements = new List<(T, float)>();
+
+    public int Count => elements.Count;
+
+    public void Enqueue(T item, float priority)
     {
-        public Vector2 Position { get; }
-        public Node Previous { get; }
-        public float Cost { get; }
-
-        public Node(Vector2 position, Node previous, float cost)
-        {
-            Position = position;
-            Previous = previous;
-            Cost = cost;
-        }
+        elements.Add((item, priority));
     }
+
+    public T Dequeue()
+    {
+        int bestIndex = 0;
+
+        for (int i = 0; i < elements.Count; i++)
+        {
+            if (elements[i].Item2 < elements[bestIndex].Item2)
+            {
+                bestIndex = i;
+            }
+        }
+
+        T bestItem = elements[bestIndex].Item1;
+        elements.RemoveAt(bestIndex);
+        return bestItem;
+    }     
 }
