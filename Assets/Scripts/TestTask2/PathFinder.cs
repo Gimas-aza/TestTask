@@ -2,31 +2,35 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PathFinder : MonoBehaviour, IPathFinder
+public class PathFinder : MonoBehaviour
 {
-    public Vector2 startPoint; // Начальная точка A
-    public Vector2 endPoint; // Конечная точка C
-    public List<Edge> testEdges; // Список тестовых рёбер
+    public Vector2 startPoint;
+    public Vector2 endPoint;
+    public List<Edge> testEdges;
+    private IEnumerable<Vector2> _path = new List<Vector2>();
 
-    void Start()
+    private void Start()
     {
-        // Проверяем, что pathFinder и testEdges установлены
-        if (testEdges == null)
+        if (testEdges == null && testEdges.Count == 0)
         {
             Debug.LogError("Необходимо настроить pathFinder и testEdges в инспекторе.");
             return;
         }
 
-        // Вызываем метод GetPath вашего pathFinder
-        IEnumerable<Vector2> path = GetPath(startPoint, endPoint, testEdges);
+       _path = GetPath(startPoint, endPoint, testEdges);
 
-        // Проверяем результат и выводим его
-        if (path != null)
+        _path = _path.Prepend(startPoint);
+
+        _path = _path.Append(endPoint);
+
+        Debug.Log(_path.Count());
+
+        if (_path != null)
         {
             Debug.Log("Найденный путь:");
-            foreach (Vector2 point in path)
+            foreach (Vector2 point in _path)
             {
-                Debug.Log(point.x);
+                Debug.Log(point.x + " " + point.y);
             }
         }
         else
@@ -35,117 +39,81 @@ public class PathFinder : MonoBehaviour, IPathFinder
         }
     }
 
-   public IEnumerable<Vector2> GetPath(Vector2 start, Vector2 end, IEnumerable<Edge> edges)
+    private void Update()
     {
-        // Создаём граф, представляющий рёбра и их вершины
-        Dictionary<Vector2, List<Vector2>> graph = CreateGraph(edges);
-
-        // Используем алгоритм поиска пути, например, A*
-        List<Vector2> path = AStarSearch(graph, start, end);
-
-        return path;
-    }
-
-    private Dictionary<Vector2, List<Vector2>> CreateGraph(IEnumerable<Edge> edges)
-    {
-        Dictionary<Vector2, List<Vector2>> graph = new Dictionary<Vector2, List<Vector2>>();
-
-        foreach (Edge edge in edges)
+        for (int i = 0; i < _path.Count() - 1; i++)
         {
-            if (!graph.ContainsKey(edge.Start))
-            {
-                graph[edge.Start] = new List<Vector2>();
-            }
-
-            if (!graph.ContainsKey(edge.End))
-            {
-                graph[edge.End] = new List<Vector2>();
-            }
-
-            graph[edge.Start].Add(edge.End);
-            graph[edge.End].Add(edge.Start);
+            Debug.DrawLine(_path.ToList()[i], _path.ToList()[i + 1], Color.red);
         }
-
-        return graph;
     }
 
-    private List<Vector2> AStarSearch(Dictionary<Vector2, List<Vector2>> graph, Vector2 start, Vector2 end)
+    private IEnumerable<Vector2> GetPath(Vector2 start, Vector2 end, IEnumerable<Edge> edges)
     {
-        List<Vector2> path = new List<Vector2>();
-        PriorityQueue<Vector2> openSet = new PriorityQueue<Vector2>();
-        Dictionary<Vector2, Vector2> cameFrom = new Dictionary<Vector2, Vector2>();
-        Dictionary<Vector2, float> gScore = new Dictionary<Vector2, float>();
+        IEnumerable<Vector2> path = new List<Vector2>();
+        Vector2 lastPoint = start;
 
-        openSet.Enqueue(start, 0);
-        gScore[start] = 0;
-
-        while (openSet.Count > 0)
+        for (int i = 0; i < edges.Count() - 1; i++)
         {
-            Vector2 current = openSet.Dequeue();
-
-            if (current == end)
+            Debug.Log(i);
+            if (CheckStartPoint(edges.ToList()[i], lastPoint))
             {
-                path = ReconstructPath(cameFrom, current);
-                break;
+                lastPoint = GetPoint(i, lastPoint);
+                path = path.Append(lastPoint);
             }
-
-            foreach (Vector2 neighbor in graph[current])
+            else
             {
-                float tentativeGScore = gScore[current] + Vector2.Distance(current, neighbor);
-                
-                if (!gScore.ContainsKey(neighbor) || tentativeGScore < gScore[neighbor])
-                {
 
-                    cameFrom[neighbor] = current;
-                    gScore[neighbor] = tentativeGScore;
-                    float priority = tentativeGScore + Vector2.Distance(neighbor, end);
-                    openSet.Enqueue(neighbor, priority);
-                }
             }
         }
 
         return path;
     }
 
-    private List<Vector2> ReconstructPath(Dictionary<Vector2, Vector2> cameFrom, Vector2 current)
+    private bool CheckStartPoint(Edge edge, Vector2 startPoint)
     {
-        List<Vector2> path = new List<Vector2>();
-        while (cameFrom.ContainsKey(current))
-        {
-            path.Add(current);
-            current = cameFrom[current];
-        }
-        path.Reverse();
-        return path;
-    }
-}
-
-// PriorityQueue для использования в A*
-public class PriorityQueue<T>
-{
-    private List<(T, float)> elements = new List<(T, float)>();
-
-    public int Count => elements.Count;
-
-    public void Enqueue(T item, float priority)
-    {
-        elements.Add((item, priority));
+        if (edge.Start.x == edge.End.x && startPoint.x == edge.Start.x) return false;
+        else if (edge.Start.y == edge.End.y && startPoint.y == edge.Start.y) return false;
+        
+        return true;
     }
 
-    public T Dequeue()
+    private Vector2 GetPoint(int indexEdge, Vector2 startPoint)
     {
-        int bestIndex = 0;
+        Vector2 middleEdgePoint = GetMiddlePointEdge(testEdges[indexEdge], out float middleEdge);
+        Vector2 middleNextEdgePoint = new Vector2();
+        float middleEdgeNext = 0;
 
-        for (int i = 0; i < elements.Count; i++)
+        if (testEdges.Count() - 1 == indexEdge)
+            middleNextEdgePoint = endPoint;
+        else
+            middleNextEdgePoint = GetMiddlePointEdge(testEdges[indexEdge + 1], out middleEdgeNext);
+        
+        Vector2 result = CalculatePointOnRay(startPoint, middleEdgePoint, middleEdgeNext);
+        return result;
+    }
+
+    private Vector2 GetMiddlePointEdge(Edge edge, out float middleEdge)
+    {
+        if (edge.Start.x == edge.End.x)
         {
-            if (elements[i].Item2 < elements[bestIndex].Item2)
-            {
-                bestIndex = i;
-            }
+            middleEdge = edge.Start.y + ((edge.End.y - edge.Start.y) / 2);
+            return new Vector2(edge.Start.x, middleEdge);
+        }
+        else if (edge.Start.y == edge.End.y)
+        {
+            middleEdge = edge.Start.x + ((edge.End.x - edge.Start.x) / 2);
+            return new Vector2(middleEdge, edge.Start.y);
         }
 
-        T bestItem = elements[bestIndex].Item1;
-        elements.RemoveAt(bestIndex);
-        return bestItem;
-    }     
+        middleEdge = 0;
+        return Vector2.zero;
+    }
+
+    private Vector2 CalculatePointOnRay(Vector2 startPoint, Vector2 endPoint, float targetY)
+    {
+        float m = (float) (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
+        float x = startPoint.x + (targetY - startPoint.y) / m;
+
+        return new Vector2(x, targetY);
+    }
 }
