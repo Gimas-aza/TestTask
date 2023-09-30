@@ -1,56 +1,102 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InputValidator
 {
-    public void CheckingEnteredData(Vector2 startPoint, Vector2 endPoint, List<Edge> listEdges)
+    public bool CheckingEnteredData(Vector2 startPoint, Vector2 endPoint, List<Edge> listEdges)
     {
         if (listEdges == null && listEdges.Count < 2)
-            throw new Exception("Необходимо настроить pathFinder и testEdges в инспекторе.");
+        {
+            Debug.LogError("Необходимо настроить pathFinder и testEdges в инспекторе.");
+            return false;
+        }
 
         if (startPoint == endPoint)
-            throw new Exception("StartPoint и EndPoint равны.");
+        {
+            Debug.LogError("StartPoint и EndPoint равны.");
+            return false;
+        }
+
+        if (startPoint.x < listEdges[0].First.Min.x || startPoint.x > listEdges[0].First.Max.x 
+            || startPoint.y < listEdges[0].First.Min.y || startPoint.y > listEdges[0].First.Max.y)
+        {
+            Debug.LogError("StartPoin выходит за рамки квадрата");
+            return false;
+        }
+
+        if (endPoint.x < listEdges.Last().Second.Min.x || endPoint.x > listEdges.Last().Second.Max.x 
+            || endPoint.y < listEdges.Last().Second.Min.y || endPoint.y > listEdges.Last().Second.Max.y)
+        {
+            Debug.Log(startPoint.x + " " + listEdges.Last().Second.Min.x);
+            Debug.LogError("EndPoint выходит за рамки квадрата");
+            return false;
+        }
 
         for (int i = 0; i < listEdges.Count; i++)
         {
-            ChecingRectangle(listEdges[i].First);
-            ChecingRectangle(listEdges[i].Second);
+            if (!ChecingRectangle(listEdges[i].First)) return false;
+            if (!ChecingRectangle(listEdges[i].Second)) return false;
+
             if ((listEdges.Count - 1) != i)
-                CheckeQualityRectangles(listEdges[i + 1].First, listEdges[i].Second);
+                if (!CheckeQualityRectangles(listEdges[i + 1].First, listEdges[i].Second)) return false;
 
-            CheckingEdge(listEdges[i]);
+            if (!CheckingEdge(listEdges[i])) return false;
         }
+
+        return true;
     }
 
-    private void ChecingRectangle(Rectangle rectangle)
+    private bool ChecingRectangle(Rectangle rectangle)
     {
-        if (rectangle.Min.magnitude > rectangle.Max.magnitude)
-            throw new Exception("rectangle.Min больше чем rectangle.Max"); 
-        if (rectangle.Min.magnitude == rectangle.Max.magnitude)
-            throw new Exception("rectangle.Min равен rectangle.Max");
-        
-        if (rectangle.Max.magnitude < 2)
-            throw new Exception("rectangle.Max.magnitude меньше 1");
+        if (rectangle.Min.x > rectangle.Max.x || rectangle.Min.y > rectangle.Max.y)
+        {
+            Debug.LogError("rectangle.Min больше чем rectangle.Max"); 
+            return false;
+        }
+        if (rectangle.Min.x == rectangle.Max.x || rectangle.Min.y == rectangle.Max.y)
+        {
+            Debug.LogError("rectangle.Min равен rectangle.Max");
+            return false;
+        }
+        if ((rectangle.Max.x - rectangle.Min.x) < 1 || (rectangle.Max.y - rectangle.Min.y) < 1)
+        {
+            Debug.LogError("rectangle меньше 1");
+            return false;
+        }
+        return true;
     }
 
-    private void CheckeQualityRectangles(Rectangle first, Rectangle second)
+    private bool CheckeQualityRectangles(Rectangle first, Rectangle second)
     {
         if (first.Min.magnitude != second.Min.magnitude || first.Max.magnitude != second.Max.magnitude)
-            throw new Exception("first должны быть равным second");
+        {
+            Debug.LogError("first должны быть равным second");
+            return false;
+        }
+        return true;
     }
 
-    private void CheckingEdge(Edge edge)
+    private bool CheckingEdge(Edge edge)
     {
         if (edge.Start.magnitude > edge.End.magnitude)
-            throw new Exception("edge.Start больше чем edge.End");
-        
+        {
+            Debug.LogError("edge.Start больше чем edge.End");
+            return false;
+        }
         if (edge.Start.x == edge.End.x)
         {
             if (edge.Start.y == edge.End.y || (edge.End.y - edge.Start.y) < 0.5f)
-                throw new Exception("edge.Start равен edge.End или промежуток между ними меньше 0.5");
+            {
+                Debug.LogError("edge.Start равен edge.End или промежуток между ними меньше 0.5");
+                return false;
+            }
         }
         else if (edge.Start.x == edge.End.x || (edge.End.x - edge.Start.x) < 0.5f)
-            throw new Exception("edge.Start равен edge.End или промежуток между ними меньше 0.5");
+        {
+            Debug.LogError("edge.Start равен edge.End или промежуток между ними меньше 0.5");
+            return false;
+        }
+        return true;
     }
 }
