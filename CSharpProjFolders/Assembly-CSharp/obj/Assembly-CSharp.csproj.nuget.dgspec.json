@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj": {}
+    "d:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj": {}
   },
   "projects": {
-    "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj": {
+    "d:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
+        "projectUniqueName": "d:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
         "projectName": "Assembly-CSharp",
-        "projectPath": "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
+        "projectPath": "d:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
         "packagesPath": "C:\\Users\\Gimas\\.nuget\\packages\\",
-        "outputPath": "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\obj\\",
+        "outputPath": "d:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Gimas\\AppData\\Roaming\\NuGet\\NuGet.Config",

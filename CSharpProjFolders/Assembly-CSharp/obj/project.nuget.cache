@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CeXsaNekOSDk7bQqG2WWhRy0gEhmFdUzN0UGxYEm0tC1ezUmDYbTObz/88DGaoteZ1G3fECOCeIFjGS0zmTf2A==",
+  "dgSpecHash": "r7c0aCiA27z8LSqRLBY3b85fNTDB9cM3gtSK1hs/Zjjwo/ickS0Ym4qB/v5rULJC1CByDqWcRK5LbzfevM+K1Q==",
   "success": true,
-  "projectFilePath": "D:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
+  "projectFilePath": "d:\\Gimas\\Documents\\Unity\\MyProject\\TestTask\\CSharpProjFolders\\Assembly-CSharp\\Assembly-CSharp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gimas\\.nuget\\packages\\microsoft.unity.analyzers\\1.17.0\\microsoft.unity.analyzers.1.17.0.nupkg.sha512"
   ],
