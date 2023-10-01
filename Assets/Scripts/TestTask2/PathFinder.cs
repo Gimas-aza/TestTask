@@ -28,7 +28,7 @@ public class PathFinder : MonoBehaviour, IPathFinder
         _path = GetPath(_startPoint, _endPoint, _listEdges);
         Debug.Log(_path.Count());
 
-        if (TryGetComponent(out _rendering))
+        if (_rendering != null)
         {
             _rendering.Init(_listEdges, _path);
             _rendering.enabled = true;
