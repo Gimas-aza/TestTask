@@ -70,7 +70,7 @@ public class PathFinder : MonoBehaviour, IPathFinder
         return path;
     }
 
-    private List<Vector2> GetPoints(int indexEdge, List<Edge> listEdges, Vector2 startPoint)
+    private List<Vector2>  GetPoints(int indexEdge, List<Edge> listEdges, Vector2 startPoint)
     {
         CalculationBy calculationBy;
         Vector2 middleOffset;
@@ -90,24 +90,33 @@ public class PathFinder : MonoBehaviour, IPathFinder
                 calculationBy = CalculationBy.Y;
             }
             point = CalculatePointOnRay(startPoint, middleEdgePoint, middleOffset, calculationBy);
-        }
-        else
-        {
-            middleOffset = GetMiddlePointRectangle(listEdges[indexEdge].Second);
-            calculationBy = CalculationBy.Y;
-            point = GetPointNearEdge(listEdges[indexEdge], listEdges[indexEdge].First); 
-            Debug.Log(point);
-            point = CalculatePointOnRay(point, middleEdgePoint, middleOffset, calculationBy);
-            Debug.Log(startPoint + " " + middleEdgePoint + " " + middleOffset);
 
             if (CheckPointOutsideRectangle(point, listEdges[indexEdge].Second))
             {
-                middleOffset = new Vector2(middleOffset.x, 0);
-                calculationBy = CalculationBy.X; 
+                calculationBy = CalculationBy.Y;
+                point = CalculatePointOnRay(startPoint, middleEdgePoint, middleOffset, calculationBy);
+            }
+        }
+        else
+        {
+            if (CheckLateralPositioningEdge(listEdges[indexEdge]))
+            {
+                middleOffset = GetMiddlePointEdge(listEdges[indexEdge + 1]);
+                calculationBy = CalculationBy.X;
+            }
+            else
+            {
+                middleOffset = GetMiddlePointRectangle(listEdges[indexEdge].Second);
+                calculationBy = CalculationBy.Y;
+            }
+            point = CalculatePointOnRay(startPoint, middleEdgePoint, middleOffset, calculationBy);
+
+            if (CheckPointOutsideRectangle(point, listEdges[indexEdge].Second))
+            {
+                point = GetPointNearEdge(listEdges[indexEdge + 1], listEdges[indexEdge + 1].First);
             }
         }
         
-        point = CalculatePointOnRay(startPoint, middleEdgePoint, middleOffset, calculationBy);
         
         return GetListPoints(point, startPoint, listEdges[indexEdge], middleEdgePoint, middleOffset, calculationBy);
     }
@@ -183,7 +192,11 @@ public class PathFinder : MonoBehaviour, IPathFinder
 
         if (CheckPointOutsideRectangle(point, edge.Second))
         {
-            point = CalculatePointOnRay(startPoint, middleEdgePoint, middleRectanglePoint, CalculationBy.X);
+            calculationBy = CheckLateralPositioningEdge(edge)
+                ? CalculationBy.Y
+                : CalculationBy.X;
+
+            point = CalculatePointOnRay(startPoint, middleEdgePoint, middleRectanglePoint, calculationBy);
         }
 
         return point;
